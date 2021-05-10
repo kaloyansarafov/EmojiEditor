@@ -1,0 +1,56 @@
+﻿<mah:MetroWindow x:Class="EmojiEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+        Title="EmojiEditor" Height="480" Width="640" MinHeight="240" MinWidth="320">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+
+            <DockPanel LastChildFill="True">
+                <ToolBarTray Height="30" Name="mToolBarTray" DockPanel.Dock="Top">
+                    <ToolBar Name="mToolBarFile">
+                        <Button Content="Clear" Name="mBtnClear" Click="mBtnClear_Click">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Clear Text</TextBlock>
+                                        <TextBlock>Clears text and starts a new Item.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Content="Open" Name="mBtnOpen" Click="mBtnOpen_Click"></Button>
+
+                        <Button Content="Save" Name="mBtnSave" Click="mBtnSave_Click"></Button>
+
+                        <Button Content="Save As" Name="mBtnSaveAs" Click="mBtnSaveAs_Click"></Button>
+
+                    </ToolBar>
+
+                    <ToolBar Name="mOptions">
+                        <CheckBox Name="mCBReadOnly" IsChecked="True" Checked="mCBReadOnly_Toggle" Unchecked="mCBReadOnly_Toggle">Read-Only</CheckBox>
+                    </ToolBar>
+
+                </ToolBarTray>
+
+
+            </DockPanel>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <DockPanel LastChildFill="True">
+        <StatusBar Height="24" Name="mStatBar" DockPanel.Dock="Bottom">
+            <StatusBarItem DockPanel.Dock="Left">
+                <TextBlock Name="mStatText" Text="Ready." />
+            </StatusBarItem>
+        </StatusBar>
+        <emoji:TextBox 
+            Name="mTB" Text="Text goes here" SpellCheck.IsEnabled="False" Language="en-US" 
+            AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" 
+            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" 
+            />
+    </DockPanel>
+</mah:MetroWindow>
