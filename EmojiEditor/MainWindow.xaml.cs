@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using Emoji.Wpf;
 using System.Text;
+using System.Linq;
 
 namespace EmojiEditor
 {
@@ -11,6 +12,8 @@ namespace EmojiEditor
     {
         Microsoft.Win32.OpenFileDialog mDlgOpen = new();
         Microsoft.Win32.SaveFileDialog mDlgSave = new();
+
+        private bool _IsInChange = false;
 
         public readonly Dictionary<char, string> emojiTable = new Dictionary<char, string>() { {'A', "💖"}, { 'B', "😁" }, { 'C', "🐨" },
             { 'D', "🐱‍" }, { 'E', "‍🐉" }, { 'F', "👻" }, { 'G', "🦑" }, { 'H', "🔥" },{'I', "✔"},{'J', "👁"},{'K', "🔔"},{'L', "💣"},{'M', "🕹"},{'N', "📞"},
@@ -105,13 +108,18 @@ namespace EmojiEditor
 
         private void mTB_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (_IsInChange) return;
+            var c = e.Changes.ElementAt(0).Offset == 0 ? e.Changes.ElementAt(0).Offset : e.Changes.ElementAt(0).Offset - 3;
+            _IsInChange = true;
             string val;
-            char toreplace = Convert.ToChar(mTB.Text.Substring(mTB.Text.Length - 1, 1));
-            if (emojiTable.TryGetValue(toreplace, out val))
+            char symbol = mTB.Text[c];
+                                            
+            if (emojiTable.TryGetValue(symbol, out val))
             {
-            mTB.Text.Remove(mTB.Text.Length - 1, 1);
-            mTB.Text += val;
+                mTB.Text.Remove(c, 1);
+                mTB.Text = mTB.Text.Insert(c, val);
             }
+                _IsInChange = false;
         }
     }
 }
