@@ -50,7 +50,7 @@
         <emoji:TextBox 
             Name="mTB" Text="Text goes here" SpellCheck.IsEnabled="False" Language="en-US" 
             AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" 
-            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
+            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" TextChanged="mTB_TextChanged"
             />
     </DockPanel>
 </mah:MetroWindow>

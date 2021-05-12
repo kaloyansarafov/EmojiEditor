@@ -102,5 +102,16 @@ namespace EmojiEditor
             writer.Close();
             UpdateStatBar("Wrote " + mTB.Text.Length.ToString() + " chars in " + mDlgSave.FileName);
         }
+
+        private void mTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string val;
+            char toreplace = Convert.ToChar(mTB.Text.Substring(mTB.Text.Length - 1, 1));
+            if (emojiTable.TryGetValue(toreplace, out val))
+            {
+            mTB.Text.Remove(mTB.Text.Length - 1, 1);
+            mTB.Text += val;
+            }
+        }
     }
 }
