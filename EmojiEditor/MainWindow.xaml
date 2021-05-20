@@ -18,14 +18,14 @@
 
             <!--Tabs-->
             <Fluent:RibbonTabItem Header="Home">
-                <Fluent:RibbonGroupBox Header="Emojify">
-                    <Fluent:Button Header="Emojify" Click="Emojify_Click"/>
+                <Fluent:RibbonGroupBox Header="Emojify" Width="60">
+                    <Fluent:Button Header="Emojify" Click="Emojify_Click" Width="50"/>
                 </Fluent:RibbonGroupBox>
 
-                <Fluent:RibbonGroupBox Header="Edit">
-                    <Fluent:Button Header="Open" Click="mBtnOpen_Click"/>
-                    <Fluent:Button Header="Save" Click="mBtnSave_Click"/>
-                    <Fluent:Button Header="Save As" Click="mBtnSaveAs_Click"/>
+                <Fluent:RibbonGroupBox Header="Edit" Width="210">
+                    <Fluent:Button Header="Open" Click="mBtnOpen_Click" Width="46"/>
+                    <Fluent:Button Header="Save" Click="mBtnSave_Click" Width="46"/>
+                    <Fluent:Button Header="Save As" Click="mBtnSaveAs_Click" Width="55"/>
                     <Fluent:ToggleButton Header="ReadOnly" 
                                          Name="mCBReadOnly"
                                          IsChecked="True" 
