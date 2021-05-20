@@ -3,45 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+        xmlns:Fluent="urn:fluent-ribbon"
         Title="EmojiEditor" Height="480" Width="640" MinHeight="240" MinWidth="320">
 
-    <mah:MetroWindow.RightWindowCommands>
-        <mah:WindowCommands>
-
-            <DockPanel LastChildFill="True">
-                <ToolBarTray Height="30" Name="mToolBarTray" DockPanel.Dock="Top">
-                    <ToolBar Name="mToolBarFile">
-                        <Button Content="Clear" Name="mBtnClear" Click="mBtnClear_Click">
-                            <Button.ToolTip>
-                                <ToolTip>
-                                    <StackPanel>
-                                        <TextBlock FontWeight="Bold">Clear Text</TextBlock>
-                                        <TextBlock>Clears text and starts a new Item.</TextBlock>
-                                    </StackPanel>
-                                </ToolTip>
-                            </Button.ToolTip>
-                        </Button>
-
-                        <Button Content="Open" Name="mBtnOpen" Click="mBtnOpen_Click"></Button>
-
-                        <Button Content="Save" Name="mBtnSave" Click="mBtnSave_Click"></Button>
-
-                        <Button Content="Save As" Name="mBtnSaveAs" Click="mBtnSaveAs_Click"></Button>
-
-                    </ToolBar>
-
-                    <ToolBar Name="mOptions">
-                        <CheckBox Name="mCBReadOnly" IsChecked="True" Checked="mCBReadOnly_Toggle" Unchecked="mCBReadOnly_Toggle">Read-Only</CheckBox>
-                    </ToolBar>
-
-                </ToolBarTray>
-
-
-            </DockPanel>
-        </mah:WindowCommands>
-    </mah:MetroWindow.RightWindowCommands>
-
+    
     <DockPanel LastChildFill="True">
+
+        <Fluent:Ribbon DockPanel.Dock="Top">
+            <!--Backstage-->
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+
+            <!--Tabs-->
+            <Fluent:RibbonTabItem Header="Home">
+                <Fluent:RibbonGroupBox Header="Emojify">
+                    <Fluent:Button Header="Emojify" Click="Emojify_Click"/>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Edit">
+                    <Fluent:Button Header="Open" Click="mBtnOpen_Click"/>
+                    <Fluent:Button Header="Save" Click="mBtnSave_Click"/>
+                    <Fluent:Button Header="Save As" Click="mBtnSaveAs_Click"/>
+                    <Fluent:ToggleButton Header="ReadOnly" 
+                                         Name="mCBReadOnly"
+                                         IsChecked="True" 
+                                         Checked="mCBReadOnly_Toggle" Unchecked="mCBReadOnly_Toggle"/>
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+        </Fluent:Ribbon>
+
         <StatusBar Height="24" Name="mStatBar" DockPanel.Dock="Bottom">
             <StatusBarItem DockPanel.Dock="Left">
                 <TextBlock Name="mStatText" Text="Ready." />
@@ -50,7 +44,8 @@
         <emoji:TextBox 
             Name="mTB" Text="Text goes here" SpellCheck.IsEnabled="False" Language="en-US" 
             AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" 
-            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" TextChanged="mTB_TextChanged"
+            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
             />
     </DockPanel>
+
 </mah:MetroWindow>

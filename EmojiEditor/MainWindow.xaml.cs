@@ -13,14 +13,12 @@ namespace EmojiEditor
         Microsoft.Win32.OpenFileDialog mDlgOpen = new();
         Microsoft.Win32.SaveFileDialog mDlgSave = new();
 
-        private bool _IsInChange = false;
-
         public readonly Dictionary<char, string> emojiTable = new Dictionary<char, string>() { {'A', "💖"}, { 'B', "😁" }, { 'C', "🐨" },
             { 'D', "🐱‍" }, { 'E', "‍🐉" }, { 'F', "👻" }, { 'G', "🦑" }, { 'H', "🔥" },{'I', "✔"},{'J', "👁"},{'K', "🔔"},{'L', "💣"},{'M', "🕹"},{'N', "📞"},
-            {'O', "📀"},{'P', "📖"}, {'Q', "📧"}, {'R', "🔒"}, {'S', "⚖"}, {'T', "📡"}, {'U', "🛒"}, {'V', "😂"}, {'X', "😶"}, {'Y', "🥶"},{'Z', "😖"},
+            {'O', "📀"},{'P', "📖"}, {'Q', "📧"}, {'R', "🔒"}, {'S', "⚖"}, {'T', "📡"}, {'U', "🛒"}, {'V', "😂"},{'W', "💦" }, {'X', "😶"}, {'Y', "🥶"},{'Z', "😖"},
             {'a', "🤖"}, { 'b', "🖖" }, { 'c', "🤙" },{ 'd', "‍🧠" }, { 'e', "‍👩" }, { 'f', "‍🏫" }, { 'g', "💂" }, { 'h', "🕵" },{'i', "🍑"},{'j', "🥜"},
             {'k', "🍄"},{'l', "🧂"},{'m', "🧈"},{'n', "🏆"},{'o', "⚾"},{'p', "🎪"}, {'q', "🧭"}, {'r', "📻"}, {'s', "💻"}, {'t', "🔋"}, {'u', "📟"},
-            {'v', "🔦"}, {'x', "💡"}, {'y', "📺"},{'z', "📽"},{'1' , "📦"},{'2' , "🛑"},{'3' , "♨️"},{'4' , "📯"},{'5' , "☢️"},{'6' , "➕"},{'7' , "⁉️"},{'8' , "⁉️"},{'9' , "©️"},{' ', " "},{ '\n',"\n"},{'.',"."}
+            {'v', "🔦"},{'w', "💀" }, {'x', "💡"}, {'y', "📺"},{'z', "📽"},{'1' , "📦"},{'2' , "🛑"},{'3' , "♨️"},{'4' , "📯"},{'5' , "☢️"},{'6' , "➕"},{'7' , "⁉️"},{'8' , "⁉️"},{'9' , "©️"},{' ', " "},{ '\n',"\n"},{'.',"."}
         };
 
         public MainWindow()
@@ -52,17 +50,7 @@ namespace EmojiEditor
             if (mDlgOpen.ShowDialog() == true)
             {
                 System.IO.StreamReader reader = new(mDlgOpen.FileName);
-                string emojify = reader.ReadToEnd();
-                StringBuilder sb = new StringBuilder();
-
-                foreach (var item in emojify)
-                {
-                    string val;
-                    emojiTable.TryGetValue(item, out val);
-                    sb.Append(val);
-                }
-
-                mTB.Text = sb.ToString();
+                mTB.Text = reader.ReadToEnd();
                 reader.Close();
                 UpdateStatBar("Read " + mDlgOpen.FileName);
             }
@@ -106,20 +94,24 @@ namespace EmojiEditor
             UpdateStatBar("Wrote " + mTB.Text.Length.ToString() + " chars in " + mDlgSave.FileName);
         }
 
-        private void mTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void Emojify_Click(object sender, RoutedEventArgs e)
         {
-            if (_IsInChange) return;
-            var c = e.Changes.ElementAt(0).Offset == 0 ? e.Changes.ElementAt(0).Offset : e.Changes.ElementAt(0).Offset - 3;
-            _IsInChange = true;
-            string val;
-            char symbol = mTB.Text[c];
-                                            
-            if (emojiTable.TryGetValue(symbol, out val))
+            string emojify = mTB.Text;
+            StringBuilder sb = new();
+            foreach (var item in emojify)
             {
-                mTB.Text.Remove(c, 1);
-                mTB.Text = mTB.Text.Insert(c, val);
+                string val = "";
+                if (emojiTable.TryGetValue(item, out val))
+                {
+                    sb.Append(val);
+                }
+                else
+                {
+                    sb.Append(item);
+                }
             }
-                _IsInChange = false;
+
+            mTB.Text = sb.ToString();
         }
     }
 }
