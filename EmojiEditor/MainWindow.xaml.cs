@@ -26,8 +26,9 @@ namespace EmojiEditor
         {
             InitializeComponent();
             ResetDlgs();
-            cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
-            cmbFontSize.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            mCbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+            mCbFontSize.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            mCbDictionaryChar.ItemsSource = emojiTable.Keys;
         }
 
         private void UpdateStatBar(string message)
@@ -118,15 +119,19 @@ namespace EmojiEditor
             UpdateStatBar("Emojified text");
         }
 
-        private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void mCbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbFontFamily.SelectedItem != null)
-                mTB.FontFamily = (FontFamily)cmbFontFamily.SelectedItem;
+            if (mCbFontFamily.SelectedItem != null)
+                mTB.FontFamily = (FontFamily)mCbFontFamily.SelectedItem;
         }
 
-        private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        private void mCbFontSize_TextChanged(object sender, TextChangedEventArgs e)
         {
-            mTB.FontSize = Convert.ToDouble(cmbFontSize.Text);
+            mTB.FontSize = Convert.ToDouble(mCbFontSize.Text);
+        }
+        private void mPDictPicker_SelectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            emojiTable[Char.Parse(mCbDictionaryChar.Text)] = mPDictPicker.Selection;
         }
     }
 }

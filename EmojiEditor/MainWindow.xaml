@@ -20,7 +20,7 @@
             <!--Tabs-->
             <Fluent:RibbonTabItem Header="Home">
                 <Fluent:RibbonGroupBox Header="Emojify" Width="60">
-                    <Fluent:Button x:Name="mCBEmojify" Header="Emojify" Click="Emojify_Click" Width="50">
+                    <Fluent:Button Name="mBtnEmojify" Header="Emojify" Click="Emojify_Click" Width="50">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:BootstrapIcons Kind="EmojiSunglasses"
                                 Width="30"
@@ -30,7 +30,7 @@
                 </Fluent:RibbonGroupBox>
 
                 <Fluent:RibbonGroupBox Header="File" Width="Auto">
-                    <Fluent:Button Header="Open" Name="Open" Click="mBtnOpen_Click" Width="55">
+                    <Fluent:Button Header="Open" Name="mBtnOpen" Click="mBtnOpen_Click" Width="55">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:Codicons Kind="FolderOpened"
                                 Width="30"
@@ -38,7 +38,7 @@
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
 
-                    <Fluent:Button x:Name="mCBSave" Header="Save" Click="mBtnSave_Click" Width="55">
+                    <Fluent:Button x:Name="mbtnSave" Header="Save" Click="mBtnSave_Click" Width="55">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:Codicons Kind="Save"
                                 Width="30"
@@ -46,7 +46,7 @@
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
                     
-                    <Fluent:Button x:Name="mCBSaveAs" Header="Save As" Click="mBtnSaveAs_Click" Width="55">
+                    <Fluent:Button x:Name="mBtnSaveAs" Header="Save As" Click="mBtnSaveAs_Click" Width="55">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:Codicons Kind="SaveAs"
                                 Width="30"
@@ -57,7 +57,7 @@
                 </Fluent:RibbonGroupBox>
 
                 <Fluent:RibbonGroupBox Header="Edit" Width="Auto">
-                    
+
                     <Fluent:ToggleButton Header="Read Only" 
                                          x:Name="mCBReadOnly"
                                          IsChecked="True" 
@@ -69,12 +69,19 @@
                         </Fluent:ToggleButton.LargeIcon>
                     </Fluent:ToggleButton>
 
-                    <Fluent:ComboBox Header="Font" Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged"/>
-                    <Fluent:ComboBox Header="Font Size" Name="cmbFontSize" Width="150" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged"/>
+                    <Fluent:ComboBox Header="Font" Name="mCbFontFamily" Width="150" SelectionChanged="mCbFontFamily_SelectionChanged"/>
+                    
+                    <Fluent:ComboBox Header="Font Size" Name="mCbFontSize" Width="150" IsEditable="True" TextBoxBase.TextChanged="mCbFontSize_TextChanged"/>
 
 
                 </Fluent:RibbonGroupBox>
-                
+
+                <Fluent:RibbonGroupBox Header="Dictionary Editor" Width="Auto">
+                    <Fluent:ComboBox Header="Char" Name="mCbDictionaryChar" Width="70"/>
+                    <emoji:Picker Name="mPDictPicker" SelectionChanged="mPDictPicker_SelectionChanged"/>
+
+                </Fluent:RibbonGroupBox>
+
             </Fluent:RibbonTabItem>
 
         </Fluent:Ribbon>
