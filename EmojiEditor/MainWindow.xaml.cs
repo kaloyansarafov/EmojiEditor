@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Emoji.Wpf;
 using System.Text;
 using System.Linq;
+using System.Windows.Media;
 
 namespace EmojiEditor
 {
@@ -25,6 +26,8 @@ namespace EmojiEditor
         {
             InitializeComponent();
             ResetDlgs();
+            cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+            cmbFontSize.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
         }
 
         private void UpdateStatBar(string message)
@@ -112,6 +115,18 @@ namespace EmojiEditor
             }
 
             mTB.Text = sb.ToString();
+            UpdateStatBar("Emojified text");
+        }
+
+        private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFontFamily.SelectedItem != null)
+                mTB.FontFamily = (FontFamily)cmbFontFamily.SelectedItem;
+        }
+
+        private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            mTB.FontSize = Convert.ToDouble(cmbFontSize.Text);
         }
     }
 }

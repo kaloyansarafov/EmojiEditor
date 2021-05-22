@@ -29,7 +29,7 @@
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>
 
-                <Fluent:RibbonGroupBox Header="File" Width="172">
+                <Fluent:RibbonGroupBox Header="File" Width="Auto">
                     <Fluent:Button Header="Open" Name="Open" Click="mBtnOpen_Click" Width="55">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:Codicons Kind="FolderOpened"
@@ -56,7 +56,7 @@
 
                 </Fluent:RibbonGroupBox>
 
-                <Fluent:RibbonGroupBox Header="Edit" Width="65">
+                <Fluent:RibbonGroupBox Header="Edit" Width="Auto">
                     
                     <Fluent:ToggleButton Header="Read Only" 
                                          x:Name="mCBReadOnly"
@@ -68,7 +68,11 @@
                                 Height="35"/>
                         </Fluent:ToggleButton.LargeIcon>
                     </Fluent:ToggleButton>
-                    
+
+                    <Fluent:ComboBox Header="Font" Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged"/>
+                    <Fluent:ComboBox Header="Font Size" Name="cmbFontSize" Width="150" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged"/>
+
+
                 </Fluent:RibbonGroupBox>
                 
             </Fluent:RibbonTabItem>
