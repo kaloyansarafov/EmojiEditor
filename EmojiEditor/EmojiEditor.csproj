@@ -10,6 +10,7 @@
     <PackageReference Include="Emoji.Wpf" Version="0.3.0" />
     <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
     <PackageReference Include="MahApps.Metro" Version="2.4.5" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
   </ItemGroup>
 
 </Project>

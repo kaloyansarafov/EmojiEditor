@@ -1,48 +1,87 @@
-﻿<mah:MetroWindow x:Class="EmojiEditor.MainWindow"
+﻿<mah:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
         xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="EmojiEditor.MainWindow"
         Title="EmojiEditor" Height="480" Width="640" MinHeight="240" MinWidth="320">
 
-    
+
     <DockPanel LastChildFill="True">
 
         <Fluent:Ribbon DockPanel.Dock="Top">
             <!--Backstage-->
             <Fluent:Ribbon.Menu>
-                <Fluent:Backstage>
-                </Fluent:Backstage>
+                <Fluent:Backstage/>
             </Fluent:Ribbon.Menu>
 
             <!--Tabs-->
             <Fluent:RibbonTabItem Header="Home">
                 <Fluent:RibbonGroupBox Header="Emojify" Width="60">
-                    <Fluent:Button Header="Emojify" Click="Emojify_Click" Width="50"/>
+                    <Fluent:Button x:Name="mCBEmojify" Header="Emojify" Click="Emojify_Click" Width="50">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:BootstrapIcons Kind="EmojiSunglasses"
+                                Width="30"
+                                Height="30"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
                 </Fluent:RibbonGroupBox>
 
-                <Fluent:RibbonGroupBox Header="Edit" Width="210">
-                    <Fluent:Button Header="Open" Click="mBtnOpen_Click" Width="46"/>
-                    <Fluent:Button Header="Save" Click="mBtnSave_Click" Width="46"/>
-                    <Fluent:Button Header="Save As" Click="mBtnSaveAs_Click" Width="55"/>
-                    <Fluent:ToggleButton Header="ReadOnly" 
-                                         Name="mCBReadOnly"
+                <Fluent:RibbonGroupBox Header="File" Width="172">
+                    <Fluent:Button Header="Open" Name="Open" Click="mBtnOpen_Click" Width="55">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:Codicons Kind="FolderOpened"
+                                Width="30"
+                                Height="35"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+
+                    <Fluent:Button x:Name="mCBSave" Header="Save" Click="mBtnSave_Click" Width="55">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:Codicons Kind="Save"
+                                Width="30"
+                                Height="35"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    
+                    <Fluent:Button x:Name="mCBSaveAs" Header="Save As" Click="mBtnSaveAs_Click" Width="55">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:Codicons Kind="SaveAs"
+                                Width="30"
+                                Height="35"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Edit" Width="65">
+                    
+                    <Fluent:ToggleButton Header="Read Only" 
+                                         x:Name="mCBReadOnly"
                                          IsChecked="True" 
-                                         Checked="mCBReadOnly_Toggle" Unchecked="mCBReadOnly_Toggle"/>
-
+                                         Checked="mCBReadOnly_Toggle" Unchecked="mCBReadOnly_Toggle" Width="55">
+                        <Fluent:ToggleButton.LargeIcon>
+                            <iconPacks:Codicons Kind="Book"
+                                Width="30"
+                                Height="35"/>
+                        </Fluent:ToggleButton.LargeIcon>
+                    </Fluent:ToggleButton>
+                    
                 </Fluent:RibbonGroupBox>
+                
             </Fluent:RibbonTabItem>
 
         </Fluent:Ribbon>
 
-        <StatusBar Height="24" Name="mStatBar" DockPanel.Dock="Bottom">
+        <StatusBar Height="24" x:Name="mStatBar" DockPanel.Dock="Bottom">
             <StatusBarItem DockPanel.Dock="Left">
-                <TextBlock Name="mStatText" Text="Ready." />
+                <TextBlock x:Name="mStatText" Text="Ready." />
             </StatusBarItem>
         </StatusBar>
         <emoji:TextBox 
-            Name="mTB" Text="Text goes here" SpellCheck.IsEnabled="False" Language="en-US" 
+            x:Name="mTB" Text="Text goes here" SpellCheck.IsEnabled="False" Language="en-US" 
             AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" 
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
             />
