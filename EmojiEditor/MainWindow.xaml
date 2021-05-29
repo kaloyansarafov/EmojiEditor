@@ -14,7 +14,22 @@
         <Fluent:Ribbon DockPanel.Dock="Top">
             <!--Backstage-->
             <Fluent:Ribbon.Menu>
-                <Fluent:Backstage/>
+                <Fluent:Backstage>
+                    <Fluent:BackstageTabControl>
+                        <Fluent:BackstageTabItem Header="New" />
+                        <Fluent:BackstageTabItem Header="Print" >
+                            <DockPanel LastChildFill="True">
+                                <Fluent:Button Header="Print" Name="bBtnPrint" Click="bBtnPrint_Click">
+                                    <Fluent:Button.LargeIcon>
+                                        <iconPacks:BootstrapIcons Kind="Printer"
+                                                                  Height="30"
+                                                                  Width="30"/>
+                                    </Fluent:Button.LargeIcon>
+                                </Fluent:Button>
+                            </DockPanel>
+                        </Fluent:BackstageTabItem>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
             </Fluent:Ribbon.Menu>
 
             <!--Tabs-->

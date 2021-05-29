@@ -6,6 +6,9 @@ using Emoji.Wpf;
 using System.Text;
 using System.Linq;
 using System.Windows.Media;
+using System.IO;
+using System.Windows.Documents;
+using System.Windows.Xps.Packaging;
 
 namespace EmojiEditor
 {
@@ -132,6 +135,20 @@ namespace EmojiEditor
         private void mPDictPicker_SelectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             emojiTable[Char.Parse(mCbDictionaryChar.Text)] = mPDictPicker.Selection;
+        }
+
+        private void bBtnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog pDialog = new PrintDialog();
+            pDialog.PageRangeSelection = PageRangeSelection.AllPages;
+            pDialog.UserPageRangeEnabled = true;
+            Nullable<Boolean> print = pDialog.ShowDialog();
+            if (print == true)
+            {
+                XpsDocument xpsDocument = new XpsDocument(mDlgSave.FileName, FileAccess.ReadWrite);
+                FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
+                pDialog.PrintDocument(fixedDocSeq.DocumentPaginator, "Test print job");
+            }
         }
     }
 }
